@@ -11,7 +11,7 @@ copyright = 'TODO'
 
 # Version
 version = "0"
-release = "0.2"
+release = "0.3"
 
 # =================================================================================================
 # General Configuration

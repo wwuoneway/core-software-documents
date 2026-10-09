@@ -1,6 +1,33 @@
 System Overview
 ===============
 
+FORM is designed as a flexible I/O layer for Phlex-based data processing, including DUNE workflows. Its layered architecture separates the Phlex-facing interface, the persistence model, and the underlying storage technologies, allowing each to evolve independently.
+
+As shown in Fig. :numref:`fig-form-design-layout`, FORM consists of three layers:
+
+**Phlex-facing Interface**
+
+* Provides a type-erased interface to the Phlex framework.
+* Handles data products without exposing storage-specific details to Phlex workflows.
+
+**Hierarchy-aware Persistence**
+
+* Maps hierarchical data products to persistent storage.
+* Supports access to data at different levels of the hierarchy.
+
+**Backend-agnostic Storage**
+
+* Manages storage through an abstraction independent of the persistence model.
+* Allows storage technologies and data formats to evolve independently.
+
+.. figure:: /_static/images/form-design-layout.png
+   :alt: Layered architecture of FORM
+   :align: center
+   :width: 50%
+   :name: fig-form-design-layout
+
+   Diagram of FORM Design Layout
+   
 
 Architecture Overview
 ---------------------
@@ -20,7 +47,7 @@ FORM employs a layered design with distinct responsibilities:
 
 -  Specifies persistence rules through configuration objects (:green:`parse_config`, :green:`PersistenceItem`)
 
--  Will be replaced by Phlex
+-  Stood in for Phlex in the design prototype; the current FORM implementation is integrated with the actual Phlex framework
 
 **form Package** (Interface and Translation):
 
@@ -60,13 +87,15 @@ FORM employs a layered design with distinct responsibilities:
 
 -  Dispatches configuration to implementation layers
 
-**root_storage Package** (Example I/O Implementation)
+**root_storage Package** (ROOT I/O Implementation)
 
--  Implements storage interfaces using TTree and TFile from the ROOT toolkit
+-  Implements storage interfaces using TFile from the ROOT toolkit
 
 -  Encapsulates all ROOT dependencies
 
 -  Writes/reads data products to/from a TTree in a TFile per-TBranch
+
+-  Also supports ROOT RNTuple as a minor technology, writing one field per data product; both TTree and RNTuple are supported in the current implementation
 
 
 FORM Philosophy

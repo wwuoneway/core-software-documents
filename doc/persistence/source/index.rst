@@ -5,6 +5,7 @@ FORM Prototype Design Overview
    :maxdepth: 2
 
    introduction
+   status-and-evolution
    system-overview
    architecture
    detailed-design
